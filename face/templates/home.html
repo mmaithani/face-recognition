@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>Facial Recognition System</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+.form-data{background: #fff; box-shadow: 1px 2px 4px #ddd; border-radius: 10px; padding: 20px;margin-top: 20px;}
+</style>
+    </head>
+
+<body>
+    <h1 style = "background: #eee;
+                 padding: 10px;
+                 margin-top: 0px;
+                 font-size: 30px;
+                 font-family: arial;margin-bottom:0px;
+                 text-align: center;"><b>Facial Recognition System</b>
+    </h1>
+    <div class="container">
+        <div class="row">
+<div class="col-sm-6 col-sm-offset-3 form-data">
+       <div class="clearfix"></div>
+        <h3>1.Extract Faces</h3>
+        <form action="extract/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+            <input type="file" name="myfile2" accept="video/*" required><br/>
+            <input type="text" name="name" class="form-control" required placeholder="Enter Username " autocomplete="off"><br><br> 
+            <button class="btn btn-primary" >Extract Faces</button>
+            <button class="btn btn-secondary" type="button" onclick="location.href='/'">Reset</button>
+           </div>
+            {% if no_file %}
+                <h5 style="color: red">No file selected!</h5>
+            {% endif %}
+        </form>
+
+        <h3>2.Train</h3>
+        <form action="train/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="btn btn-primary">Train</button>
+        </form>
+           <form action="deleteuser/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>Remove User credential</h3>
+            <input type="text" name = 'user' class="form-control" required placeholder="Enter Username"autocomplete="off"><br>
+            <button class="btn btn-primary">Remove This User</button>
+        </form>
+        
+    <h3>Test Local Videos</h3>
+        <form action="detect/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+            <input type="file" name="myfile"  accept="video/*" required><br/>
+            <button class="btn btn-primary" type="submit">Upload & Test</button>
+            <button class="btn btn-secondary" type="button" onclick="location.href='/'">Reset</button>
+            </div>
+            {% if no_file %}
+                <h5 style="color: red">No file selected!</h5>
+            {% endif %}
+        </form>
+
+ 
+        <form action="detectlive/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+            <h3>Choose the camera for Live Feed</h3>
+            <select name="dropdown" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+            <button class="btn btn-primary">Check Live Feed</button>
+        </form>
+
+     
+  <!--       <form action="deleteuser/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>Remove User Data</h3>
+            <input type="text" name = 'user' class="form-control" placeholder="Enter Username" autocomplete="off"><br>
+            <button class="btn btn-primary">Remove This User to Database</button>
+        </form> -->
+</div>
+</div>
+    </div>
+</body>
+</html>
