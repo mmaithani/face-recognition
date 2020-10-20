@@ -14,7 +14,6 @@ urlpatterns = [
                   
                   # Url to select a file for the predictions
                   # url('fileselect/', SelectPredFileView.as_view(), name='file_select'),
-                  #(? url(r'^delete/$', FileDeleteView.as_view(), name='APIdelete'),)
    
                 
                   url(r'deleteuser/', views.deleteuser),
